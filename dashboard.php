@@ -1,18 +1,15 @@
 <?php
-session_start();  // Inicia la sesión para acceder a las variables de sesión.
+session_start(); 
 
-// Verificar si el usuario ha iniciado sesión
 if (!isset($_SESSION['username'])) {  
-    header("Location: login_usuario.php");  // Redirige al login si no está autenticado.
-    exit();  // Detiene la ejecución del código.
+    header("Location: login_usuario.php");
+    exit();
 }
 
-// Obtener los datos del usuario de la sesión
-$username = $_SESSION['username'];  // Asigna el nombre de usuario.
-$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';  // Asigna el email si existe, o una cadena vacía.
-$user_type = $_SESSION['user_type'];  // Asigna el tipo de usuario.
+$username = $_SESSION['username'];
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+$user_type = $_SESSION['user_type'];
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -20,14 +17,9 @@ $user_type = $_SESSION['user_type'];  // Asigna el tipo de usuario.
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <!-- Importar Materialize CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <!-- Estilos personalizado -->
     <link rel="stylesheet" href="../css/styledash.css">
-    
-    <!-- Importar FontAwesome para los íconos -->
     <script src="https://kit.fontawesome.com/6a99d12e52.js" crossorigin="anonymous"></script>
-    
 </head>
 <body>
 
@@ -44,7 +36,7 @@ $user_type = $_SESSION['user_type'];  // Asigna el tipo de usuario.
                 <div class="background">
                     <img src="../img/fondoDash.jpg" alt="Background">
                 </div>
-                <a href="#user"><img class="circle" src="../img/usuario.png" alt="User"></a>
+                <a href="#user"><img class="circle responsive-img" src="../img/usuario.png" alt="User"></a>
                 <a href="#name"><span class="white-text name"><?php echo htmlspecialchars($username); ?></span></a>
                 <a href="#email"><span class="white-text email"><?php echo htmlspecialchars($email); ?></span></a>
             </div>
@@ -60,14 +52,13 @@ $user_type = $_SESSION['user_type'];  // Asigna el tipo de usuario.
     </ul>
 
     <!-- Contenido principal -->
-    <main style="margin-left: 300px; padding: 20px;">
+    <main class="container">
         <h2>Bienvenido, <?php echo htmlspecialchars($username); ?>!</h2>
         <h4>Resumen del Dashboard</h4>
         <p>Aquí puedes ver estadísticas, administrar tu perfil y acceder a todas las herramientas disponibles.</p>
 
         <div class="row">
-            <!-- Tarjeta para Registro de Usuarios -->
-            <div class="col s12 m4">
+            <div class="col s12 m6">
                 <div class="card user-card card-link" onclick="location.href='mostrar_usuarios.php'">
                     <div class="card-content">
                         <span class="card-title"><i class="fas fa-users"></i> Registro de Usuarios</span>
@@ -76,8 +67,7 @@ $user_type = $_SESSION['user_type'];  // Asigna el tipo de usuario.
                 </div>
             </div>
 
-            <!-- Tarjeta para Registro de Productos -->
-            <div class="col s12 m4">
+            <div class="col s12 m6">
                 <div class="card product-card card-link" onclick="location.href='mostrar_productos.php'">
                     <div class="card-content">
                         <span class="card-title"><i class="fas fa-box"></i> Registro de Productos</span>
@@ -88,18 +78,13 @@ $user_type = $_SESSION['user_type'];  // Asigna el tipo de usuario.
         </div>
     </main>
 
-    <!-- Importar Materialize JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-    // Inicializar el sidenav para escritorio y móviles
-    // Espera a que el contenido del documento se haya cargado completamente
-    document.addEventListener('DOMContentLoaded', function() {  
-        // Selecciona todos los elementos con la clase 'sidenav'
-        var elems = document.querySelectorAll('.sidenav'); 
-        // Inicializa el sidenav con la librería Materialize y lo coloca en el lado izquierdo
-        M.Sidenav.init(elems, {edge: 'left'});  
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        M.Sidenav.init(elems, {edge: 'left'});
     });
-</script>
+    </script>
 
 </body>
 </html>
